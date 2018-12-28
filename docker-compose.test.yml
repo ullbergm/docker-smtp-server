@@ -1,0 +1,17 @@
+version: '2'
+services:
+
+  proxy:
+    build: .
+    environment:
+    - SMTP_RELAY_HOST=relay
+    - SMTP_RELAY_MYHOSTNAME=myhostname
+    - SMTP_RELAY_USERNAME=username
+    - SMTP_RELAY_PASSWORD=password
+
+  sut:
+    build: ./test/
+    links:
+    - proxy
+    volumes:
+    - ./test/results:/results
